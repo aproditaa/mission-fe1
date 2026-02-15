@@ -1,7 +1,7 @@
 import Input from "../components/Input";
 import Button from "../components/Button";
 import googleIcon from "../assets/images/google-icon.png";
-import idFlag from "../assets/images/indonesia(ID).png";
+import idFlag from "../assets/images/Indonesia(ID).png";
 
 export default function RegisterCard() {
   return (
