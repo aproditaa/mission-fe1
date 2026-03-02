@@ -157,7 +157,7 @@ export default function MetodePembayaran() {
                   onClick={() => navigate('/pembayaran', { state: { ...checkoutData, totalPrice, selectedMethod } })}
                   className="w-full bg-[#3ECF4C] text-white py-4 rounded-[10px] font-bold text-[16px] hover:bg-[#35bd42] transition-transform active:scale-[0.98]"
                 >
-                  Bayar Sekarang
+                  Beli Sekarang
                 </button>
               </div>
             </div>

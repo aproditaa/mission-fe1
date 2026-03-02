@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { courses } from '../data/courses';
 import videoThumbnail from '../assets/images/video-placeholder.png'; 
 import ratingIcon from '../assets/images/rating.png';
@@ -8,7 +8,6 @@ import FooterVideo from '../components/FooterVideo';
 
 export default function VideoCourse() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [openAccordion, setOpenAccordion] = useState(0);
 
   const progressPercent = 25; 
@@ -97,12 +96,7 @@ export default function VideoCourse() {
                         {group.items.map((item, idx) => (
                           <div 
                             key={idx}
-                            onClick={() => {
-                                if (idx === 1) {
-                                    navigate(`/aturan/${course.id}`);
-                                }
-                            }}
-                            className={`flex items-center gap-4 px-6 py-4 cursor-pointer hover:bg-gray-50 transition-all border-l-4 ${
+                            className={`flex items-center gap-4 px-6 py-4 transition-all border-l-4 ${
                               idx === 0 && index === 0 
                               ? 'bg-[#3ECF4C]/10 border-[#3ECF4C]' 
                               : 'border-transparent'
@@ -119,7 +113,7 @@ export default function VideoCourse() {
                               <p className="text-[13px] font-medium">{item}</p>
                               <p className="text-[11px] text-[#A3A3A3] mt-0.5">12 Menit</p>
                             </div>
-                            <div className="text-[#A3A3A3] text-[10px] opacity-30 group-hover:opacity-100 transition-opacity">▶</div>
+                            <div className="text-[#A3A3A3] text-[10px] opacity-30">▶</div>
                           </div>
                         ))}
                       </div>
@@ -139,7 +133,7 @@ export default function VideoCourse() {
         </div>
       </main>
 
-      <FooterVideo />
+      <FooterVideo courseId={course.id} />
     </div>
   );
 }

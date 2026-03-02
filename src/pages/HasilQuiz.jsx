@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { courses } from '../data/courses';
 import NavbarVideo from '../components/NavbarVideo';
@@ -11,15 +11,17 @@ export default function HasilQuiz() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  
   const course = courses.find(c => String(c.id) === String(id)) || courses[0];
+  
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewText, setReviewText] = useState("");
 
   const resultData = location.state || { score: 0, benar: 0, salah: 10 };
   const { score, benar, salah } = resultData;
   const totalSoal = 10;
+  
   const isPass = score >= 60;
-
   const isFinished = isPass; 
 
   return (
@@ -35,7 +37,11 @@ export default function HasilQuiz() {
           
           <div className="flex-1 flex flex-col gap-6">
             <div className="rounded-[25px] overflow-hidden border border-[#F1F1F1] shadow-sm bg-white">
-              <img src={isPass ? congratsBanner : tryAgainBanner} alt="Status" className="w-full h-auto" />
+              <img 
+                src={isPass ? congratsBanner : tryAgainBanner} 
+                alt={isPass ? "Congratulations" : "Try Again"} 
+                className="w-full h-auto" 
+              />
               
               <div className="p-6 md:p-8">
                 <p className="text-[14px] font-bold text-[#737373] mb-4">
@@ -43,7 +49,7 @@ export default function HasilQuiz() {
                 </p>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  <div className="p-4 rounded-2xl border border-[#F1F1F1] bg-white">
+                  <div className="p-4 rounded-2xl border border-[#F1F1F1] bg-white text-center md:text-left">
                     <p className="text-[12px] text-[#A3A3A3] mb-1">Nilai</p>
                     <p className={`text-[20px] font-bold ${isPass ? 'text-[#3ECF4C]' : 'text-[#F04438]'}`}>{score}</p>
                   </div>
@@ -71,8 +77,11 @@ export default function HasilQuiz() {
                 </div>
 
                 {!isPass && (
-                  <button onClick={() => navigate(`/soal-awal/${id}`)} className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[#3ECF4C] text-[#3ECF4C] font-bold text-[14px] hover:bg-green-50 transition-all">
-                    <span>🔄</span> Ulangi Quiz
+                  <button 
+                    onClick={() => navigate(`/aturan/${id}`)} 
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[#3ECF4C] text-[#3ECF4C] font-bold text-[14px] hover:bg-green-50 transition-all"
+                  >
+                    Ulangi Quiz
                   </button>
                 )}
               </div>
@@ -84,7 +93,6 @@ export default function HasilQuiz() {
               <div className="p-5 border-b border-[#F1F1F1] bg-gray-50/50 font-bold text-[15px]">Daftar Modul</div>
               <div className="max-h-[500px] overflow-y-auto no-scrollbar">
                 {course.syllabus[0].items.map((item, idx) => {
-                  const isLastItem = idx === course.syllabus[0].items.length - 1;
                   const isCompleted = isFinished || idx <= 1;
 
                   return (
@@ -147,7 +155,7 @@ export default function HasilQuiz() {
         </div>
       )}
 
-      <FooterVideo />
+      <FooterVideo courseId={id} />
     </div>
   );
 }

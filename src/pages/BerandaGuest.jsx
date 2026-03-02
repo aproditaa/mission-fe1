@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
+import NavbarGuest from '../components/NavbarGuest';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import CourseCard from '../components/CourseCard';
 import { courses as initialCourses } from '../data/courses';
-import Hero from '../assets/images/banner.png';
+import Hero from "../assets/images/banner.png";
 
-export default function Home() {
+export default function BerandaGuest() {
   const [courseList] = useState(initialCourses);
   const [activeCategory, setActiveCategory] = useState("Semua Kelas");
 
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#FFFDF3] min-h-screen">
-      <Navbar />
+      <NavbarGuest />
 
       <section className="w-full py-[28px] px-[20px] md:py-[64px] md:px-[120px]">
         <div className="relative overflow-hidden rounded-[10px] flex items-center justify-center text-center w-full h-[400px]">
@@ -45,7 +45,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-[20px] md:px-[120px] pb-20">
+      <section className="px-[20px] md:px-[120px] pb-2">
         <div className="flex flex-col gap-[4px] md:gap-[8px] mb-[32px] md:mb-[48px]">
           <h2 className="text-[24px] md:text-[32px] font-poppins font-semibold text-[#222222]">
             Koleksi Video Pembelajaran Unggulan
@@ -71,9 +71,9 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 md:gap-x-16 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 md:gap-y-8 md:gap-x-16 justify-items-center">
           {filteredCourses.map((item) => (
-            <CourseCard key={item.id} course={item} />
+            <CourseCard key={item.id} course={item} isGuest={true} />
           ))}
         </div>
       </section>

@@ -1,9 +1,19 @@
-import Input from "../components/Input";
-import Button from "../components/Button";
-import googleIcon from "../assets/images/google-icon.png";
-import idFlag from "../assets/images/Indonesia(ID).png";
+import { useNavigate } from 'react-router-dom';
+import Input from '../components/Input';
+import Button from '../components/Button';
+import googleIcon from '../assets/images/google-icon.png';
+import idFlag from '../assets/images/Indonesia(ID).png';
 
 export default function RegisterCard() {
+  const navigate = useNavigate();
+
+  const goTo = (path) => navigate(path);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Pendaftaran diproses, silakan login melalui LoginCard.");
+  };
+
   return (
     <div className="bg-white rounded-[4px] border border-gray-200 shadow-sm flex flex-col mx-auto w-full max-w-[320px] md:max-w-[590px] p-[20px] md:p-[36px] gap-[20px] md:gap-[36px]">
       
@@ -12,7 +22,7 @@ export default function RegisterCard() {
         <p className="font-dmsans text-[#737373] text-[12px] md:text-[14px]">Yuk, daftarkan akunmu sekarang juga!</p>
       </div>
 
-      <form className="flex flex-col w-full gap-[20px] md:gap-[24px]">
+      <form onSubmit={handleSubmit} className="flex flex-col w-full gap-[20px] md:gap-[24px]">
         <Input label="Nama Lengkap" id="name" required />
         <Input label="E-Mail" type="email" id="email" required />
 
@@ -33,8 +43,17 @@ export default function RegisterCard() {
         <Input label="Konfirmasi Kata Sandi" type="password" id="confirm" required />
 
         <div className="flex flex-col gap-[12px] mt-2">
-          <Button variant="primary" type="submit">Daftar</Button>
-          <Button variant="secondary">Masuk</Button>
+          <Button variant="primary" type="submit">
+            Daftar
+          </Button>
+          
+          <Button 
+            variant="secondary" 
+            type="button" 
+            onClick={() => goTo('/login')}
+          >
+            Masuk
+          </Button>
         </div>
 
         <div className="relative flex items-center">
@@ -43,7 +62,7 @@ export default function RegisterCard() {
           <div className="flex-grow border-t border-gray-200"></div>
         </div>
 
-        <Button variant="outline">
+        <Button variant="outline" type="button">
           <img src={googleIcon} alt="Google" className="w-5 h-5" />
           Daftar dengan Google
         </Button>
